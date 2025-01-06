@@ -16,6 +16,7 @@ export const MENU: MenuItem[] = [
 
     // { key: 'apps', label: 'Apps', isTitle: true },
     { key: 'home', label: 'Home', isTitle: false, icon: 'uil-home-alt', link: '/home' },
+    { key: 'report', label: 'Report', isTitle: false, icon: ' uil-receipt-alt', link: '/report' },
     { key: 'members', label: 'Members', isTitle: false, icon: 'uil-users-alt', link: '/members' },
     // { key: 'apps-chat', label: 'Chat', isTitle: false, icon: 'uil-comments-alt', link: '/apps/chat' },
     // {

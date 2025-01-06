@@ -2,6 +2,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { QuillModule } from 'ngx-quill';
+import { ItemReportModule } from './pages/item-report/item-report.module';
 
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { FakeBackendProvider } from './core/helpers/fake-backend';
@@ -20,7 +21,8 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     QuillModule.forRoot(),
     LayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ItemReportModule
   ],
   providers: [
     Title,

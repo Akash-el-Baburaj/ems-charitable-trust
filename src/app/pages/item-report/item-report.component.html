@@ -1,0 +1,51 @@
+<div class="row mt-2">
+    <div class="col-12 mb-2">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Search by consumer name" 
+          [(ngModel)]="searchText"
+          (ngModelChange)="filterItems()"
+        />
+      </div>
+    <div class="card" *ngFor="let item of filteredItems; let i = index;">
+        <div class="card-body px-1">
+            <span class="float-start m-0 me-4" > 
+                <img [src]="item.image" width="110" style="height: 100px;" alt="" class="img-thumbnail">
+            </span>
+            <div class="mb-0">
+                <h5 class="mb-1"><i class="mdi mdi-account-circle-outline"></i> {{item.customerName}}</h5>
+                <h6 class="mb-0"><i class="mdi mdi-phone-classic"></i>  {{item.customerMobile}}</h6>
+<hr>
+    
+                <ul class="mb-0 list-inline">
+                    <li class="list-inline-item me-3">
+                        <h5 class="mt-0 mb-0">{{item.name}}</h5>
+                        <p class="font-13 mb-0">Consumed Count: {{item.count}}</p>        
+                        <p class="mb-1"><i class="mdi mdi-calendar-clock"></i> Start Date: {{item.itemDisbursedDate | date: 'dd-MMM-yyyy'}}</p>
+                        <p class="mb-1">
+                            <i class="mdi mdi-calendar-check"></i> 
+                            Return Date: 
+                            <span *ngIf="item.itemReturnedDate; else inUseBadge">
+                              {{ item.itemReturnedDate | date: 'dd-MMM-yyyy' }}
+                            </span>
+                            <ng-template #inUseBadge>
+                              <span class="badge bg-success fs-5">In Use</span>
+                            </ng-template>
+                          </p>
+                    </li>
+                    <li class="list-inline-item w-100">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-primary w-100 me-2">Deatils</button>
+                            <button 
+                            class="btn btn-sm btn-success w-100" 
+                            [disabled]="!!item.itemReturnedDate">
+                            Return
+                          </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

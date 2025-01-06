@@ -1,22 +1,72 @@
 <div class="row">
-    <div class="col-sm-6 col-lg-3" *ngFor="let item of products">
-
-        <!-- Simple card -->
-        <div class="card d-block">
-            <img class="card-img-top" [src]="item.images" alt="item.name">
-            <div class="card-body">
-                <h5 class="card-title">{{item.name}}</h5>
-                <div class="product-price" ><span class="text-accent">Total Stock {{item.totalStock}}</span>
-                    <!-- <del class="fs-sm text-muted" >Available Stock {{item.availbleStock}}</del> -->
-                  </div>
-                  <div class="product-price mb-3" ><span class="text-success">Available Stock {{item.availbleStock}}</span>
-                    <!-- <del class="fs-sm text-muted" >Available Stock {{item.availbleStock}}</del> -->
-                  </div>
-                <div class="d-flex justify-align-between">
-                    <a [routerLink]="'.'" class="btn btn-primary w-50">Return</a>
-                    <a [routerLink]="'.'" class="btn btn-success w-50">Provide</a>
-                </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div><!-- end col -->
-</div>
+    <!-- Search and Add Button Section -->
+    <div class="col-12 mb-2 mt-2 d-flex justify-content-between align-items-center position-sticky top-0 bg-white py-2 shadow-sm">
+      <input 
+        type="text" 
+        class="form-control w-75 me-2" 
+        placeholder="Search by product name" 
+        [(ngModel)]="searchText"
+        (ngModelChange)="filterProducts()"
+      />
+      <a href="javascript:void(0)" class="btn btn-primary" style="width: 100px;" (click)="openSaveItemModal({},addItemModal)">
+        <i class="mdi mdi-plus"></i> Add
+      </a>
+    </div>
+  
+    <!-- Product Cards -->
+    <div class="col-sm-6 col-lg-3" *ngFor="let item of filteredProducts">
+      <!-- Simple Card -->
+      <div class="card d-block">
+        <img class="card-img-top" [src]="item.images" alt="item.name">
+        <div class="card-body">
+          <h5 class="card-title">{{item.name}}</h5>
+          <div class="product-price">
+            <span class="text-accent">Total Stock: {{item.totalStock}}</span>
+          </div>
+          <div class="product-price mb-3">
+            <span class="text-success">Available Stock: {{item.availbleStock}}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <a [routerLink]="'.'" class="btn btn-primary w-50">Return</a>
+            <a [routerLink]="'.'" class="btn btn-success w-50">Provide</a>
+          </div>
+        </div> <!-- end card-body-->
+      </div> <!-- end card-->
+    </div> <!-- end col -->
+  </div>
+  
+<ng-template  #addItemModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Save Item</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form #itemForm="ngForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Item Name</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="item.name" name="name" required />
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input type="file" id="image" class="form-control" (change)="onImageChange($event)" name="image" accept=".png, .jpg, .jpef, .webp" required />
+      </div>
+      <div class="mb-3">
+        <label for="totalStock" class="form-label">Total Stock</label>
+        <input type="number" id="totalStock" class="form-control" [(ngModel)]="item.totalStock" name="totalStock" required />
+      </div>
+      <div class="mb-3">
+        <label for="outStock" class="form-label">Out Stock</label>
+        <input type="number" id="outStock" class="form-control" [(ngModel)]="item.outStock" name="outStock" required />
+      </div>
+      <div class="mb-3">
+        <label for="balance" class="form-label">Balance</label>
+        <input type="number" id="balance" class="form-control" [(ngModel)]="item.balance" name="balance" required />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="save(addItemModal)">Save</button>
+  </div>
+  
+</ng-template>

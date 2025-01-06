@@ -12,7 +12,7 @@ export const Items: any[] = [
         name: 'Walker',
         totalStock: 50,
         availbleStock: 20,
-        images: 'assets/images/products/images.jpeg',
+        images: 'assets/images/products/product-1.jpg',
         
     },
     {
@@ -20,7 +20,7 @@ export const Items: any[] = [
         name: 'Water Bed',
         totalStock: 50,
         availbleStock: 20,
-        images: "assets/images/products/product-4.jpeg",
+        images: "assets/images/products/images.jpeg",
         
     },
     {
